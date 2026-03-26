@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist Electrician Autorizat ANRE Gr.2A+B</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --bg2: #ffffff;
+    --bg3: #edeae3;
+    --text: #1a1814;
+    --text2: #4a4740;
+    --text3: #7a7670;
+    --accent: #c8952a;
+    --accent-light: #fdf3df;
+    --green: #166534;
+    --green-bg: #dcfce7;
+    --green-border: #86efac;
+    --red: #991b1b;
+    --red-bg: #fee2e2;
+    --red-border: #fca5a5;
+    --blue: #1e40af;
+    --blue-bg: #dbeafe;
+    --border: #d4d0c8;
+    --border-dark: #b8b4aa;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+  
+  /* Header */
+  .site-header {
+    background: var(--text);
+    color: #fff;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .site-header .logo {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-weight: 600; font-size: 14px; color: #fff;
+    flex-shrink: 0;
+  }
+  .site-header h1 { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; }
+  .site-header p { font-size: 12px; color: rgba(255,255,255,0.55); font-family: var(--mono); margin-top: 2px; }
+
+  /* Tabs */
+  .tabs-nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  .tabs-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 12px 16px;
+    border: none; background: none;
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    color: var(--text3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+  /* Layout */
+  .tab-panel { display: none; padding: 24px; max-width: 1100px; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+
+  /* Cards */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 12px 18px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-header h3 { font-size: 13px; font-weight: 600; flex: 1; }
+  .card-body { padding: 18px; }
+
+  /* Phase headers */
+  .phase-header {
+    display: flex; align-items: center; gap: 10px;
+    margin: 28px 0 12px;
+  }
+  .phase-header:first-of-type { margin-top: 0; }
+  .phase-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--text); color: #fff;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .phase-header h2 { font-size: 15px; font-weight: 600; }
+  .phase-header p { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+  /* Checklist items */
+  .check-list { list-style: none; }
+  .check-list li {
+    display: grid;
+    grid-template-columns: 20px 1fr auto auto;
+    align-items: start;
+    gap: 8px 12px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--bg3);
+  }
+  .check-list li:last-child { border-bottom: none; }
+  .check-list li:hover { background: var(--bg3); border-radius: 4px; }
+  .check-list input[type=checkbox] { margin-top: 3px; accent-color: var(--accent); width: 14px; height: 14px; flex-shrink: 0; }
+  .check-list .item-text { font-size: 13px; }
+  .check-list .item-doc {
+    font-size: 11px; font-family: var(--mono);
+    background: var(--accent-light); color: var(--accent);
+    padding: 1px 6px; border-radius: 3px; white-space: nowrap;
+    border: 1px solid rgba(200,149,42,0.25);
+    align-self: start;
+  }
+  .check-list .item-norm {
+    font-size: 10px; color: var(--text3);
+    font-style: italic; font-family: var(--mono);
+    max-width: 160px; text-align: right;
+    align-self: start;
+  }
+  .warn-item { background: #fffbeb !important; }
+  .warn-item .item-text { color: #92400e; }
+
+  /* Normative note */
+  .norm-note {
+    font-style: italic;
+    font-weight: 600;
+    color: #5c4a1e;
+    background: #fdf8ec;
+    border: 1px solid #e8d5a0;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .norm-note::before { content: "(* "; }
+  .norm-note::after { content: " *)"; }
+
+  /* Document styling */
+  .doc-header {
+    border: 1.5px solid var(--border-dark);
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .doc-title {
+    font-size: 15px; font-weight: 600;
+    text-align: center;
+    border-bottom: 1.5px solid var(--text);
+    padding-bottom: 10px; margin-bottom: 12px;
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .doc-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+  }
+  .doc-field { font-size: 12px; font-family: var(--mono); }
+  .doc-field label { color: var(--text3); font-size: 10px; display: block; margin-bottom: 1px; }
+  .doc-field span { border-bottom: 1px solid var(--border-dark); display: block; padding: 2px 4px; }
+
+  /* Version toggle */
+  .version-toggle {
+    display: flex; gap: 8px; margin-bottom: 16px; align-items: center;
+  }
+  .ver-btn {
+    padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    font-family: var(--mono); cursor: pointer; border: 1.5px solid var(--border);
+    background: var(--bg2); color: var(--text2); transition: all .15s;
+  }
+  .ver-btn.admis.active { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+  .ver-btn.neconf.active { background: var(--red-bg); border-color: var(--red-border); color: var(--red); }
+  .version-note { font-size: 11px; color: var(--text3); font-style: italic; margin-left: 8px; }
+
+  /* Measurement tables */
+  .meas-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .meas-table th {
+    background: var(--text); color: #fff;
+    padding: 7px 10px; text-align: left;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+  }
+  .meas-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  .meas-table tr:nth-child(even) td { background: var(--bg3); }
+  .meas-table tr:hover td { background: var(--accent-light); }
+  .val-ok { color: var(--green); font-weight: 600; }
+  .val-bad { color: var(--red); font-weight: 600; }
+  .concl-ok {
+    background: var(--green-bg); color: var(--green);
+    padding: 2px 8px; border-radius: 3px; font-weight: 600; font-size: 11px;
+    border: 1px solid var(--green-border); white-space: nowrap;
+  }
+  .concl-bad {
+    background: var(--red-bg); color: var(--red);
+    padding: 2px 8px; border-radius: 3px; font-weight: 600; font-size: 11px;
+    border: 1px solid var(--red-border); white-space: nowrap;
+  }
+  .concl-warn {
+    background: #fef9c3; color: #854d0e;
+    padding: 2px 8px; border-radius: 3px; font-weight: 600; font-size: 11px;
+    border: 1px solid #fde047; white-space: nowrap;
+  }
+
+  /* Signature block */
+  .sig-block {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px; margin-top: 20px;
+    border-top: 1px solid var(--border); padding-top: 14px;
+  }
+  .sig-field { text-align: center; font-size: 11px; font-family: var(--mono); }
+  .sig-field .sig-line {
+    border-bottom: 1px solid var(--text);
+    height: 40px; margin-bottom: 4px;
+  }
+  .sig-field label { color: var(--text3); font-size: 10px; }
+
+  /* Non-conformity box */
+  .nonconf-box {
+    border: 1.5px solid var(--red-border);
+    background: var(--red-bg);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+  }
+  .nonconf-box h4 { color: var(--red); font-size: 12px; font-weight: 600; margin-bottom: 6px; font-family: var(--mono); }
+  .nonconf-box ul { list-style: none; }
+  .nonconf-box ul li { font-size: 12px; color: var(--red); padding: 2px 0; font-family: var(--mono); }
+  .nonconf-box ul li::before { content: "✕ "; }
+
+  .conf-box {
+    border: 1.5px solid var(--green-border);
+    background: var(--green-bg);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+  }
+  .conf-box h4 { color: var(--green); font-size: 12px; font-weight: 600; margin-bottom: 6px; font-family: var(--mono); }
+  .conf-box ul { list-style: none; }
+  .conf-box ul li { font-size: 12px; color: var(--green); padding: 2px 0; font-family: var(--mono); }
+  .conf-box ul li::before { content: "✓ "; }
+
+  /* Version panels */
+  .v-panel { display: none; }
+  .v-panel.show { display: block; }
+
+  /* Extras */
+  .section-note {
+    font-size: 12px; color: var(--text3);
+    border-left: 3px solid var(--accent);
+    padding: 6px 10px;
+    background: var(--accent-light);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+  .badge-phase {
+    font-size: 10px; font-family: var(--mono); font-weight: 600;
+    padding: 1px 7px; border-radius: 2px;
+    display: inline-block; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .bp-pre { background: #dcfce7; color: #166534; }
+  .bp-exec { background: #fef9c3; color: #854d0e; }
+  .bp-post { background: #dbeafe; color: #1e40af; }
+  .bp-rec { background: #f3e8ff; color: #6b21a8; }
+
+  table.doc-info { width: 100%; font-family: var(--mono); font-size: 12px; border-collapse: collapse; margin-bottom: 16px; }
+  table.doc-info td { padding: 4px 8px; border: 1px solid var(--border); }
+  table.doc-info td:first-child { color: var(--text3); width: 36%; background: var(--bg3); font-size: 11px; }
+
+  .instrument-box {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+  }
+  .instr-tag {
+    font-size: 11px; font-family: var(--mono);
+    background: var(--bg3); border: 1px solid var(--border);
+    padding: 2px 8px; border-radius: 3px; color: var(--text2);
+  }
+
+  h4.sub { font-size: 13px; font-weight: 600; margin: 14px 0 8px; color: var(--text); }
+
+  /* ── Warn item = OBLIGATORIU CRITIC ── */
+  .warn-item { background: #fff7ed !important; border-left: 3px solid #f59e0b !important; }
+  .warn-item .item-text { color: #78350f; font-weight: 500; }
+  .warn-legend {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 14px;
+    font-size: 12px; font-family: var(--mono);
+    padding: 9px 14px; background: var(--bg2);
+    border: 1px solid var(--border); border-radius: 6px; align-items: center;
+  }
+  .warn-legend .leg-item { display: flex; align-items: center; gap: 7px; }
+  .leg-sq { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+  .leg-normal { background: var(--bg2); border: 1.5px solid var(--border); }
+  .leg-crit { background: #fff7ed; border-left: 3px solid #f59e0b; }
+
+  /* ── Project data panel ── */
+  .project-panel { padding: 24px; max-width: 900px; margin: 0 auto; }
+  .proj-intro {
+    background: var(--text); color: #fff;
+    border-radius: 10px; padding: 22px 26px; margin-bottom: 22px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .proj-intro .pi-badge {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 10px; font-family: var(--mono); font-weight: 600;
+    padding: 2px 10px; border-radius: 3px; margin-bottom: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .proj-intro h2 { font-size: 17px; font-weight: 600; margin-bottom: 5px; }
+  .proj-intro p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 640px) { .proj-grid { grid-template-columns: 1fr; } }
+
+  .proj-section {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; box-shadow: var(--shadow);
+  }
+  .proj-section-head {
+    padding: 9px 14px; display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border); background: var(--bg3);
+  }
+  .psh-icon {
+    width: 24px; height: 24px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center; font-size: 13px;
+  }
+  .psh-blue  { background: #dbeafe; }
+  .psh-amber { background: #fef3c7; }
+  .psh-green { background: #dcfce7; }
+  .psh-purple{ background: #f3e8ff; }
+  .psh-red   { background: #fee2e2; }
+  .proj-section-head h3 { font-size: 12px; font-weight: 600; font-family: var(--mono); }
+  .proj-section-body { padding: 12px 14px; }
+
+  .proj-field { margin-bottom: 10px; }
+  .proj-field:last-child { margin-bottom: 0; }
+  .proj-field label {
+    display: block; font-size: 10px; font-family: var(--mono); font-weight: 600;
+    color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px;
+  }
+  .proj-field input, .proj-field textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 5px;
+    padding: 7px 9px; font-family: var(--sans); font-size: 12px;
+    color: var(--text); background: var(--bg); outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .proj-field input:focus, .proj-field textarea:focus {
+    border-color: var(--accent); background: #fff;
+    box-shadow: 0 0 0 3px rgba(200,149,42,0.12);
+  }
+  .proj-field textarea { resize: vertical; min-height: 50px; }
+
+  .proj-apply-btn {
+    width: 100%; padding: 12px; border-radius: 8px; border: none;
+    background: var(--text); color: #fff; font-family: var(--mono);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background .15s; margin-top: 14px; letter-spacing: .02em;
+  }
+  .proj-apply-btn:hover { background: #2d2a24; }
+  .proj-status {
+    text-align: center; font-size: 12px; font-family: var(--mono);
+    color: var(--green); margin-top: 8px; min-height: 18px;
+  }
+  [data-field].field-flash {
+    animation: fflash .7s ease-out;
+  }
+  @keyframes fflash {
+    0%   { background: rgba(200,149,42,0.35); border-radius: 2px; }
+    100% { background: transparent; }
+  }
+
+  @media print {
+    .tabs-nav, .version-toggle, .site-header, .floating-toolbar, .anno-panel, .anno-bubble, .project-panel .proj-apply-btn { display: none !important; }
+    .tab-panel { display: block !important; }
+    .v-panel { display: block !important; }
+    .card { break-inside: avoid; page-break-inside: avoid; }
+    [contenteditable] { border: none !important; background: transparent !important; }
+    .anno-mark { background: #fff3cd !important; }
+  }
+
+  /* ── Floating toolbar ── */
+  .floating-toolbar {
+    position: fixed; bottom: 20px; right: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+    z-index: 9000;
+  }
+  .ftb-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 14px; border-radius: 8px;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    border: none; cursor: pointer; white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .ftb-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.22); }
+  .ftb-btn:active { transform: translateY(0); }
+  .ftb-edit { background: var(--text); color: #fff; }
+  .ftb-edit.on { background: #854d0e; color: #fff; }
+  .ftb-anno { background: #1e40af; color: #fff; }
+  .ftb-export { background: var(--accent); color: #fff; }
+  .ftb-print { background: #166534; color: #fff; }
+  .ftb-notes { background: #6b21a8; color: #fff; }
+  .save-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #4ade80; display: inline-block; margin-left: 4px;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  /* ── Edit mode ── */
+  body.edit-mode [contenteditable] {
+    outline: none;
+    border-bottom: 1.5px dashed var(--accent) !important;
+    background: rgba(200,149,42,0.06) !important;
+    border-radius: 2px;
+    min-width: 40px; display: inline-block;
+    cursor: text;
+    padding: 1px 3px;
+  }
+  body.edit-mode [contenteditable]:focus {
+    background: rgba(200,149,42,0.14) !important;
+    border-bottom-color: #b8741a !important;
+    box-shadow: 0 0 0 2px rgba(200,149,42,0.18);
+  }
+  body.edit-mode [contenteditable]:empty::before {
+    content: attr(data-placeholder);
+    color: var(--text3); font-style: italic; pointer-events: none;
+  }
+  .edit-badge {
+    position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+    background: #854d0e; color: #fff;
+    padding: 5px 18px; border-radius: 20px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    z-index: 8999; display: none; letter-spacing: .05em;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  body.edit-mode .edit-badge { display: block; }
+
+  /* ── Annotation tooltip (on selection) ── */
+  .anno-tooltip {
+    position: fixed; z-index: 9999;
+    background: #1e40af; color: #fff;
+    padding: 6px 12px; border-radius: 6px;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    cursor: pointer; display: none;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    transition: opacity .1s;
+    white-space: nowrap;
+  }
+  .anno-tooltip::after {
+    content: ''; position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: #1e40af;
+  }
+  .anno-tooltip:hover { background: #1d4ed8; }
+
+  /* ── Annotation marks in text ── */
+  .anno-mark {
+    background: #fef08a; border-bottom: 2px solid #eab308;
+    border-radius: 2px; cursor: pointer; position: relative;
+    transition: background .15s;
+  }
+  .anno-mark:hover { background: #fde047; }
+  .anno-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #1e40af; color: #fff;
+    font-size: 9px; font-weight: 700; font-family: var(--mono);
+    vertical-align: super; margin-left: 1px; cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* ── Annotation popover (on click) ── */
+  .anno-bubble {
+    position: fixed; z-index: 9998;
+    background: var(--bg2); border: 1.5px solid #1e40af;
+    border-radius: 10px; padding: 12px 14px;
+    max-width: 280px; min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    display: none; font-family: var(--sans); font-size: 13px;
+  }
+  .anno-bubble .ab-head {
+    font-size: 10px; font-family: var(--mono); font-weight: 600;
+    color: #1e40af; text-transform: uppercase; letter-spacing: .05em;
+    margin-bottom: 6px; display: flex; justify-content: space-between;
+  }
+  .anno-bubble .ab-text { color: var(--text); line-height: 1.5; }
+  .anno-bubble .ab-del {
+    background: var(--red-bg); color: var(--red);
+    border: 1px solid var(--red-border); border-radius: 4px;
+    font-size: 11px; font-family: var(--mono); font-weight: 600;
+    padding: 3px 8px; cursor: pointer; margin-top: 8px; display: block;
+    width: 100%; text-align: center;
+  }
+
+  /* ── Annotation input dialog ── */
+  .anno-dialog {
+    position: fixed; z-index: 10000;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: var(--bg2); border: 1.5px solid #1e40af;
+    border-radius: 12px; padding: 20px;
+    width: 340px; box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+    display: none;
+  }
+  .anno-dialog h3 { font-size: 14px; margin-bottom: 12px; color: var(--text); }
+  .anno-dialog textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; font-family: var(--sans); font-size: 13px;
+    resize: vertical; min-height: 80px; color: var(--text);
+    background: var(--bg); outline: none;
+  }
+  .anno-dialog textarea:focus { border-color: #1e40af; }
+  .anno-dialog .ad-btns { display: flex; gap: 8px; margin-top: 12px; justify-content: flex-end; }
+  .anno-dialog button {
+    padding: 7px 16px; border-radius: 6px; font-family: var(--mono);
+    font-size: 12px; font-weight: 600; cursor: pointer; border: none;
+  }
+  .ad-ok { background: #1e40af; color: #fff; }
+  .ad-cancel { background: var(--bg3); color: var(--text2); border: 1px solid var(--border) !important; }
+  .anno-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+    z-index: 9999; display: none;
+  }
+
+  /* ── Notes panel ── */
+  .notes-panel {
+    position: fixed; right: 0; top: 0; bottom: 0;
+    width: 300px; background: var(--bg2);
+    border-left: 1.5px solid #1e40af;
+    z-index: 8000; transform: translateX(100%);
+    transition: transform .25s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  }
+  .notes-panel.open { transform: translateX(0); }
+  .notes-panel-head {
+    padding: 14px 16px; background: #1e40af; color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .notes-panel-head h3 { font-size: 13px; font-weight: 600; font-family: var(--mono); }
+  .notes-panel-close {
+    background: none; border: none; color: #fff; cursor: pointer;
+    font-size: 18px; line-height: 1; padding: 0 4px;
+  }
+  .notes-list { flex: 1; overflow-y: auto; padding: 12px; }
+  .note-item {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;
+    cursor: pointer; transition: background .15s;
+  }
+  .note-item:hover { background: var(--accent-light); border-color: var(--accent); }
+  .note-num { font-size: 10px; font-family: var(--mono); font-weight: 700; color: #1e40af; margin-bottom: 4px; }
+  .note-excerpt { font-size: 11px; color: var(--text3); font-style: italic; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .note-text { font-size: 12px; color: var(--text); line-height: 1.5; }
+  .note-del { float: right; background: none; border: none; color: var(--red); cursor: pointer; font-size: 14px; margin-left: 4px; }
+  .no-notes { text-align: center; color: var(--text3); font-size: 12px; font-family: var(--mono); padding: 30px 10px; }
+
+  @media (max-width: 600px) {
+    .doc-fields { grid-template-columns: 1fr; }
+    .sig-block { grid-template-columns: 1fr; }
+    .check-list li { grid-template-columns: 20px 1fr; }
+    .item-doc, .item-norm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="logo">⚡</div>
+  <div>
+    <h1>Checklist Electrician Autorizat ANRE Grad 2A+B — Execuție după proiect terț</h1>
+    <p>Documente, verificări și consemnări · De la preluarea lucrării până la recepție</p>
+  </div>
+</div>
+
+<!-- Edit badge -->
+<div class="edit-badge">✏ MOD EDITARE ACTIV — click pe orice câmp pentru a modifica</div>
+
+<!-- Annotation tooltip (appears on text selection) -->
+<div class="anno-tooltip" id="annoTooltip" onclick="openAnnoDialog()">📌 Adaugă notă</div>
+
+<!-- Annotation input dialog -->
+<div class="anno-overlay" id="annoOverlay"></div>
+<div class="anno-dialog" id="annoDialog">
+  <h3>📌 Adaugă adnotare</h3>
+  <textarea id="annoInput" placeholder="Scrie nota ta aici..." autofocus></textarea>
+  <div class="ad-btns">
+    <button class="ad-cancel" onclick="cancelAnno()">Anulează</button>
+    <button class="ad-ok" onclick="confirmAnno()">Salvează nota</button>
+  </div>
+</div>
+
+<!-- Annotation bubble (on mark click) -->
+<div class="anno-bubble" id="annoBubble">
+  <div class="ab-head"><span id="abTitle">Notă #1</span><span id="abDate" style="color:var(--text3);font-weight:400"></span></div>
+  <div class="ab-text" id="abText"></div>
+  <button class="ab-del" onclick="deleteAnno()">🗑 Șterge adnotare</button>
+</div>
+
+<!-- Notes panel -->
+<div class="notes-panel" id="notesPanel">
+  <div class="notes-panel-head">
+    <h3>📌 Toate adnotările (<span id="noteCount">0</span>)</h3>
+    <button class="notes-panel-close" onclick="toggleNotesPanel()">✕</button>
+  </div>
+  <div class="notes-list" id="notesList"></div>
+</div>
+
+<!-- Floating toolbar -->
+<div class="floating-toolbar">
+  <button class="ftb-btn ftb-notes" onclick="toggleNotesPanel()">📋 Adnotări</button>
+  <button class="ftb-btn ftb-anno" id="annoModeBtn" onclick="toggleAnnoMode()">📌 Mod Notare</button>
+  <button class="ftb-btn ftb-edit" id="editBtn" onclick="toggleEditMode()">✏ Editare</button>
+  <button class="ftb-btn ftb-print" onclick="window.print()">🖨 Print</button>
+  <button class="ftb-btn ftb-export" onclick="exportHTML()">💾 Salvează HTML</button>
+</div>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab('date-proiect',this)">① Date Proiect</button>
+  <button class="tab-btn" onclick="showTab('checklist',this)">☑ Checklist</button>
+  <button class="tab-btn" onclick="showTab('pv-pam',this)">PV Priză Pământ</button>
+  <button class="tab-btn" onclick="showTab('pv-trasee',this)">PV Trasee</button>
+  <button class="tab-btn" onclick="showTab('bul-izol',this)">Buletin Izolație</button>
+  <button class="tab-btn" onclick="showTab('bul-pe',this)">Buletin PE</button>
+  <button class="tab-btn" onclick="showTab('bul-ddr',this)">Buletin DDR</button>
+  <button class="tab-btn" onclick="showTab('bul-zs',this)">Buletin Zs</button>
+  <button class="tab-btn" onclick="showTab('pv-rec',this)">PV Recepție</button>
+</nav>
+
+<!-- ===================== DATE PROIECT ===================== -->
+<div id="date-proiect" class="tab-panel active">
+  <div class="project-panel">
+    <div class="proj-intro">
+      <div class="pi-badge">Pasul 1 — Completează o singură dată</div>
+      <h2>Date comune ale lucrării</h2>
+      <p>Completează câmpurile de mai jos. Apasă <strong style="color:var(--accent)">„Aplică în toate documentele"</strong> și toate datele se vor propaga automat în PV-uri, buletiine și PV de recepție. Poți reveni oricând să le modifici.</p>
+    </div>
+
+    <div class="proj-grid">
+      <!-- OBIECT LUCRARE -->
+      <div class="proj-section">
+        <div class="proj-section-head">
+          <div class="psh-icon psh-amber">🏗</div>
+          <h3>Obiectul lucrării</h3>
+        </div>
+        <div class="proj-section-body">
+          <div class="proj-field">
+            <label>Denumire obiect / lucrare</label>
+            <textarea id="pf-obiect" placeholder="ex: Instalație electrică interioară — Bloc locuințe P+4E, Str. Electricienilor nr. 12, Iași" rows="2"></textarea>
+          </div>
+          <div class="proj-field">
+            <label>Adresă / Locație</label>
+            <input type="text" id="pf-adresa" placeholder="ex: Str. Electricienilor nr. 12, Iași">
+          </div>
+        </div>
+      </div>
+
+      <!-- BENEFICIAR -->
+      <div class="proj-section">
+        <div class="proj-section-head">
+          <div class="psh-icon psh-blue">👤</div>
+          <h3>Beneficiar</h3>
+        </div>
+        <div class="proj-section-body">
+          <div class="proj-field">
+            <label>Denumire beneficiar</label>
+            <input type="text" id="pf-ben-nume" placeholder="ex: SC CONSTRUCT PREMIUM SRL sau Popescu Ion">
+          </div>
+          <div class="proj-field">
+            <label>CUI / CNP (opțional)</label>
+            <input type="text" id="pf-ben-cui" placeholder="ex: CUI 123456789">
+          </div>
+          <div class="proj-field">
+            <label>Reprezentant / Persoană de contact</label>
+            <input type="text" id="pf-ben-rep" placeholder="ex: ing. Vasile Constantin">
+          </div>
+        </div>
+      </div>
+
+      <!-- EXECUTANT -->
+      <div class="proj-section">
+        <div class="proj-section-head">
+          <div class="psh-icon psh-green">⚡</div>
+          <h3>Executant (tu)</h3>
+        </div>
+        <div class="proj-section-body">
+          <div class="proj-field">
+            <label>Firma / PFA executant</label>
+            <input type="text" id="pf-exec-firma" placeholder="ex: SC ELECTRO EXECUȚIE SRL">
+          </div>
+          <div class="proj-field">
+            <label>CUI firmă (opțional)</label>
+            <input type="text" id="pf-exec-cui" placeholder="ex: CUI 987654321">
+          </div>
+          <div class="proj-field">
+            <label>Nume electrician autorizat</label>
+            <input type="text" id="pf-electric-nume" placeholder="ex: Ionescu Mihai">
+          </div>
+          <div class="proj-field">
+            <label>Nr. autorizație ANRE</label>
+            <input type="text" id="pf-electric-aut" placeholder="ex: 12345 · Grad 2A+B">
+          </div>
+        </div>
+      </div>
+
+      <!-- PROIECTANT -->
+      <div class="proj-section">
+        <div class="proj-section-head">
+          <div class="psh-icon psh-purple">📐</div>
+          <h3>Proiectant</h3>
+        </div>
+        <div class="proj-section-body">
+          <div class="proj-field">
+            <label>Nume proiectant</label>
+            <input type="text" id="pf-proj-nume" placeholder="ex: ing. Popescu Andrei">
+          </div>
+          <div class="proj-field">
+            <label>Nr. autorizație ANRE proiectant</label>
+            <input type="text" id="pf-proj-aut" placeholder="ex: tip IE Gr.2A+B, aut. nr. 54321">
+          </div>
+          <div class="proj-field">
+            <label>Nr. proiect</label>
+            <input type="text" id="pf-proj-nr" placeholder="ex: IE-2024-045">
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTRACT -->
+      <div class="proj-section">
+        <div class="proj-section-head">
+          <div class="psh-icon psh-red">📄</div>
+          <h3>Contract de execuție</h3>
+        </div>
+        <div class="proj-section-body">
+          <div class="proj-field">
+            <label>Nr. contract</label>
+            <input type="text" id="pf-contract-nr" placeholder="ex: CE-2024-112">
+          </div>
+          <div class="proj-field">
+            <label>Data contractului</label>
+            <input type="date" id="pf-contract-data">
+          </div>
+        </div>
+      </div>
+
+      <!-- DIRIGINTE -->
+      <div class="proj-section">
+        <div class="proj-section-head">
+          <div class="psh-icon psh-amber">🔍</div>
+          <h3>Diriginte de șantier (dacă există)</h3>
+        </div>
+        <div class="proj-section-body">
+          <div class="proj-field">
+            <label>Nume diriginte</label>
+            <input type="text" id="pf-dirig-nume" placeholder="ex: Georgescu Maria">
+          </div>
+          <div class="proj-field">
+            <label>Nr. autorizație diriginte</label>
+            <input type="text" id="pf-dirig-aut" placeholder="ex: aut. IS nr. 789">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="proj-apply-btn" onclick="applyProjectData()">
+      ✔ Aplică în toate documentele
+    </button>
+    <div class="proj-status" id="projStatus"></div>
+
+    <div style="margin-top:20px; padding:12px 16px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; font-size:12px; color:var(--text3); font-family:var(--mono); line-height:1.8;">
+      <strong style="color:var(--text)">Ce se propagă automat:</strong> numele beneficiarului, executantului, electricianului, proiectantului și numărul de proiect apar în toate tabelele <em>doc-info</em> din PV-uri și buletiine, în blocurile de semnătură și în PV-ul de recepție. <br>
+      <strong style="color:var(--text)">Ce NU se propagă:</strong> datele și valorile de măsurători (acestea sunt specifice fiecărui document și se completează manual în modul ✏ Editare).
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CHECKLIST ===================== -->
+<div id="checklist" class="tab-panel">
+  <div class="warn-legend">
+    <span style="font-weight:600;color:var(--text2);">Legendă:</span>
+    <span class="leg-item"><span class="leg-sq leg-normal"></span> Item normal — obligatoriu de parcurs</span>
+    <span class="leg-item"><span class="leg-sq leg-crit"></span> ⚠ Item CRITIC — obligatoriu și cu consecință legală imediată dacă e omis (PV lipsă, document retroactiv, etc.)</span>
+  </div>
+  <div class="section-note">Bifează pe parcurs. <strong>Document</strong> = ce se întocmește la acel pas. <strong>Normativ</strong> = sursa obligației. Itemii ⚠ nu sunt opționali — omiterea lor poate duce la nulitatea recepției sau răspundere civilă/penală.</div>
+
+  <!-- FAZA 1 -->
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <div>
+      <h2>Preluarea lucrării — Analiza proiectului</h2>
+      <p>Înainte de orice comandă de materiale sau mobilizare pe teren</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <ul class="check-list">
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Proiectul are ștampila și semnătura proiectantului autorizat ANRE (tip IE sau DE, grad corespunzător tensiunii)</div>
+          <span class="item-doc">Adresă constatare</span>
+          <span class="item-norm">Leg. 123/2012 art.8 · Ord.ANRE 11/2013</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Proiectul conține toate piesele scrise: memoriu tehnic, calcule, liste de materiale</div>
+          <span class="item-doc">Adresă constatare</span>
+          <span class="item-norm">I7-2011 pct.1.5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Proiectul conține toate piesele desenate: scheme monofilare, planuri de instalații, schema blocului de măsură și protecție</div>
+          <span class="item-doc">Adresă constatare</span>
+          <span class="item-norm">I7-2011 pct.1.5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Soluțiile din proiect respectă normativele în vigoare (I7-2011, NTE 007, PE 155 după caz)</div>
+          <span class="item-doc">Notă internă</span>
+          <span class="item-norm">I7-2011</span>
+        </li>
+        <li class="warn-item">
+          <input type="checkbox">
+          <div class="item-text">⚠ Dacă există neconcordanțe sau lipsuri în proiect: notificați proiectantul în SCRIS (e-mail cu confirmare sau adresă înregistrată). NU se începe execuția pe proiect neclar.</div>
+          <span class="item-doc">Adresă scrisă proiectant</span>
+          <span class="item-norm">Leg.10/1995 art.22</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Semnat contractul de execuție cu beneficiarul (cu referire expresă la numărul proiectului și proiectantul elaborator)</div>
+          <span class="item-doc">Contract execuție</span>
+          <span class="item-norm">Cod Civil art.1166</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAZA 2 -->
+  <div class="phase-header">
+    <div class="phase-num">2</div>
+    <div>
+      <h2>Înainte de execuție — Teren și autorizații</h2>
+      <p>Înainte de mobilizarea echipei pe șantier</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <ul class="check-list">
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Vizita de teren efectuată; identificate traseele și punctele de conectare</div>
+          <span class="item-doc">Jurnal de șantier</span>
+          <span class="item-norm">I7-2011 pct.1.4</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Identificate și marcate rețelele edilitare existente (curent, gaz, apă, canalizare, telecomunicații)</div>
+          <span class="item-doc">Schiță teren / note</span>
+          <span class="item-norm">Leg.319/2006 art.13</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Obținut avizul de racordare / acord tehnic de la Distribuitorul de energie electrică (dacă lucrarea include branșament sau modificare putere instalată)</div>
+          <span class="item-doc">Aviz distribuitor</span>
+          <span class="item-norm">Leg.123/2012 art.62 · Ord.ANRE 59/2013</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Verificat că autorizațiile ANRE ale tuturor electricienilor din echipă sunt valabile și corespund tipului de lucrare</div>
+          <span class="item-doc">Copii autorizații</span>
+          <span class="item-norm">Ord.ANRE 11/2013 art.4</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Verificat că aparatura de măsurare are verificarea metrologică în termen (megohmetru, telumetru, tester DDR, loop tester)</div>
+          <span class="item-doc">Buletin metrologic aparat</span>
+          <span class="item-norm">Leg.31/2006 (metrologie) · SR EN 61557</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Întocmit Planul propriu de securitate și sănătate în muncă (SSM) specific lucrării electrice</div>
+          <span class="item-doc">Plan SSM</span>
+          <span class="item-norm">Leg.319/2006 art.13 · HG 1048/2006</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Deschis Jurnalul de șantier / Registrul de execuție (se completează zilnic pe toată durata lucrării)</div>
+          <span class="item-doc">Jurnal de șantier</span>
+          <span class="item-norm">HG 273/1994 art.4</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAZA 3 -->
+  <div class="phase-header">
+    <div class="phase-num">3</div>
+    <div>
+      <h2>Pe parcursul execuției — Lucrări ascunse și materiale</h2>
+      <p>Concomitent cu execuția, etapizat pe tipul de lucrare</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <ul class="check-list">
+        <li class="warn-item">
+          <input type="checkbox">
+          <div class="item-text">⚠ PV lucrări ascunse — PRIZELE DE PĂMÂNT: semnat CU BENEFICIARUL / DIRIGINTELE înainte de acoperirea cu pământ sau beton. Include rezultatul măsurătorii rezistenței.</div>
+          <span class="item-doc">PV Lucrări Ascunse</span>
+          <span class="item-norm">Leg.10/1995 art.22 · I7-2011 pct.7.3 · PE 116/97</span>
+        </li>
+        <li class="warn-item">
+          <input type="checkbox">
+          <div class="item-text">⚠ PV lucrări ascunse — TRASEE ÎNGROPATE (în șapă, sub tencuială, în zidărie): semnat înainte de acoperire, cu schiță de traseu</div>
+          <span class="item-doc">PV Lucrări Ascunse</span>
+          <span class="item-norm">Leg.10/1995 art.22 · HG 273/1994</span>
+        </li>
+        <li class="warn-item">
+          <input type="checkbox">
+          <div class="item-text">⚠ PV lucrări ascunse — CONEXIUNI ÎN DOZE ÎNGROPATE: semnat înainte de acoperirea fiecărei doze (tipul conexiunilor, secțiunile, culorile conductorilor)</div>
+          <span class="item-doc">PV Lucrări Ascunse</span>
+          <span class="item-norm">Leg.10/1995 art.22 · I7-2011 pct.5.1.7</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Colectate Declarațiile de Performanță (DoP) / Declarațiile de conformitate CE pentru cabluri, tablouri, prize, aparataj, DDR, întreruptoare</div>
+          <span class="item-doc">Dosar materiale</span>
+          <span class="item-norm">Reg.UE 305/2011 · SR EN 60669 · SR EN 60947</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Verificat că materialele puse în operă corespund cu specificațiile din proiect (tip cablu, secțiune, clasă de reacție la foc, grad de protecție IP)</div>
+          <span class="item-doc">Jurnal de șantier + DoP</span>
+          <span class="item-norm">I7-2011 pct.3.1 · SR EN 60364-5-52</span>
+        </li>
+        <li class="warn-item">
+          <input type="checkbox">
+          <div class="item-text">⚠ Orice modificare față de proiect (traseu, secțiune, tip echipament): notificată proiectantului și acceptată scris ÎNAINTE de execuție. Modificările se reflectă în schemele as-built.</div>
+          <span class="item-doc">Adresă proiectant + AS-BUILT</span>
+          <span class="item-norm">Leg.10/1995 art.22 · I7-2011 pct.1.4</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Completat Jurnalul de șantier zilnic: lucrări executate, materiale puse în operă, forță de muncă, incidente, observații</div>
+          <span class="item-doc">Jurnal de șantier</span>
+          <span class="item-norm">HG 273/1994 art.4 · HG 925/1995</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAZA 4 -->
+  <div class="phase-header">
+    <div class="phase-num">4</div>
+    <div>
+      <h2>Înainte de punerea sub tensiune — Teste pre-energizare</h2>
+      <p>Cu instalația deconectată de la rețea / sursă</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <ul class="check-list">
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Verificare vizuală completă: conexiuni strânse, identificare/etichetare circuite, lipsa corpurilor străine, acoperitori montați</div>
+          <span class="item-doc">Buletin verificare / Jurnal</span>
+          <span class="item-norm">SR EN 60364-6:2016 pct.6.4.1</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Continuitatea conductorilor de protecție (PE) și a legăturilor echipotenţiale principale și suplimentare. Valoare max. admisă: &lt; 1 Ω</div>
+          <span class="item-doc">Buletin Continuitate PE</span>
+          <span class="item-norm">SR EN 60364-6:2016 pct.6.4.3.2 · I7-2011 pct.7.3.2</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Rezistența de izolație a tuturor circuitelor (fiecare circuit separat, receptoarele deconectate). Valoare min. admisă: ≥ 1 MΩ la 500V DC</div>
+          <span class="item-doc">Buletin Rezistență Izolație</span>
+          <span class="item-norm">SR EN 60364-6:2016 pct.6.4.3.3 · I7-2011 pct.7.3.3</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Rezistența prizei de pământ (dacă nu a fost măsurată la PV lucrări ascunse). Valoare conform proiect, de regulă ≤ 1 Ω (TN) sau ≤ 4 Ω (TT cu DDR ≤ 300mA)</div>
+          <span class="item-doc">Buletin Priză Pământ (sau PV LA)</span>
+          <span class="item-norm">I7-2011 pct.5.2.2 · PE 116/97 pct.3.5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Polaritatea corectă a circuitelor (L pe borne de fază, N pe borne de nul, PE pe borne de protecție) — verificare vizuală după culori și măsurare</div>
+          <span class="item-doc">Buletin verificare / Jurnal</span>
+          <span class="item-norm">SR EN 60364-6:2016 pct.6.4.3.5 · I7-2011 pct.3.2.4</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAZA 5 -->
+  <div class="phase-header">
+    <div class="phase-num">5</div>
+    <div>
+      <h2>După punerea sub tensiune — Teste post-energizare</h2>
+      <p>Cu instalația sub tensiune, înainte de predare</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <ul class="check-list">
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Secvența de faze la tablouri trifazate (L1-L2-L3 direct, sens corect pentru motoare și echipamente rotative). Verificată înainte de conectarea oricărui motor.</div>
+          <span class="item-doc">Buletin verificare / Jurnal</span>
+          <span class="item-norm">SR EN 60364-6:2016 pct.6.4.3.5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Tensiunile de alimentare: 230V ±10% fază-nul, 400V ±10% fază-fază. Măsurate la bornele de intrare tablou și la cel mai îndepărtat punct</div>
+          <span class="item-doc">Buletin verificare / Jurnal</span>
+          <span class="item-norm">SR EN 50160:2011 · I7-2011 pct.2.1</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Verificarea și testarea DDR (dispozitive diferențiale de curent rezidual): curent de declanșare, timp de declanșare, funcționare buton TEST</div>
+          <span class="item-doc">Buletin Verificare DDR</span>
+          <span class="item-norm">SR EN 60364-4-41:2007 pct.411.4.4 · SR EN 60364-6:2016 pct.6.4.3.7</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Impedanța buclei de defect (Zs) la cel mai îndepărtat punct al fiecărui circuit terminal. Se verifică că Zs ≤ Uo/Ia (Ia = curentul de declanșare al protecției în 0.4s)</div>
+          <span class="item-doc">Buletin Buclă Defect Zs</span>
+          <span class="item-norm">SR EN 60364-4-41:2007 pct.411.4.5 · SR EN 60364-6:2016 pct.6.4.3.6</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Căderea de tensiune sub sarcină nominală pe circuitele principale și terminale. Limita admisă: ΔU ≤ 3% pe circuit terminal, ΔU ≤ 5% total (sursă la receptor)</div>
+          <span class="item-doc">Buletin verificare / Raport final</span>
+          <span class="item-norm">I7-2011 pct.2.1.3 · SR EN 60364-5-52</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FAZA 6 -->
+  <div class="phase-header">
+    <div class="phase-num">6</div>
+    <div>
+      <h2>Recepție — Predarea lucrării</h2>
+      <p>Documente finale, semnături, arhivare</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <ul class="check-list">
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Schemele AS-BUILT întocmite și semnate de tine (reflectă exact ce s-a executat, cu toate modificările față de proiectul inițial)</div>
+          <span class="item-doc">Scheme as-built</span>
+          <span class="item-norm">Leg.10/1995 art.22 · HG 273/1994 Anexa 5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Dosar complet de verificări: toate buletinele de măsurători (izolație, PE, DDR, Zs), toate PV-urile de lucrări ascunse</div>
+          <span class="item-doc">Dosar verificări</span>
+          <span class="item-norm">SR EN 60364-6:2016 pct.6.5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Declarațiile de conformitate / DoP ale tuturor materialelor și echipamentelor puse în operă (cabluri, tablouri, prize, DDR, aparataj)</div>
+          <span class="item-doc">Dosar materiale DoP</span>
+          <span class="item-norm">Reg.UE 305/2011 · HG 622/2004</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Completat dosarul Cărții Tehnice a Construcției — contribuția instalației electrice (PV-uri, buletiine, DoP, as-built, instrucțiuni de exploatare)</div>
+          <span class="item-doc">Cartea Tehnică a Construcției</span>
+          <span class="item-norm">Leg.10/1995 art.22 · HG 273/1994 art.22-30</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Semnat Procesul-Verbal de Recepție la Terminarea Lucrărilor cu beneficiarul (și cu dirigintele de șantier / ISC dacă e cazul)</div>
+          <span class="item-doc">PV Recepție</span>
+          <span class="item-norm">HG 273/1994 art.8 · HG 343/2017</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Predat beneficiarului instrucțiunile de exploatare și întreținere a instalației electrice</div>
+          <span class="item-doc">Instrucțiuni de exploatare</span>
+          <span class="item-norm">I7-2011 pct.1.7 · SR EN 60364-6:2016 pct.6.5</span>
+        </li>
+        <li>
+          <input type="checkbox">
+          <div class="item-text">Arhivat o copie a întregului dosar (contract, proiect, PV-uri, buletiine, as-built, PV recepție) — termen minim de păstrare: 10 ani</div>
+          <span class="item-doc">Arhivă proprie</span>
+          <span class="item-norm">Leg.10/1995 art.22 · SR EN 60364-6:2016 pct.6.5</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /checklist -->
+
+<!-- ===================== PV LUCRĂRI ASCUNSE — PRIZĂ PĂMÂNT ===================== -->
+<div id="pv-pam" class="tab-panel">
+  <div class="section-note">Document obligatoriu semnat CU BENEFICIARUL / DIRIGINTELE înainte de acoperirea prizei de pământ. Fără acest PV, lucrarea nu poate fi recepționată.</div>
+  <div class="card">
+    <div class="card-header">
+      <h3>Versiune document — comutare exemplu</h3>
+    </div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('pam','admis',this)">✓ CONFORMĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('pam','neconf',this)">✕ NECONFORMĂ</button>
+        <span class="version-note">Valorile evidențiate în roșu sunt cele care duc la neconformitate</span>
+      </div>
+
+      <!-- ADMIS -->
+      <div id="pam-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">PROCES-VERBAL DE LUCRĂRI ASCUNSE<br><span style="font-size:12px;font-weight:400;">Priză de pământ artificială</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect / Lucrare</td><td><span data-field="obiect">Instalație electrică interioară — Bloc locuințe P+4E, Str. Electricienilor nr. 12, Iași</span></td></tr>
+            <tr><td>Beneficiar</td><td><span data-field="beneficiar">SC CONSTRUCT PREMIUM SRL, CUI 123456789</span></td></tr>
+            <tr><td>Executant</td><td><span data-field="executant">SC ELECTRO EXECUȚIE SRL — Electrician autorizat ANRE Gr.2A+B: Ionescu Mihai</span></td></tr>
+            <tr><td>Proiect nr.</td><td><span data-field="proiect-nr">IE-2024-045 / elaborat de ing. Popescu Andrei, autorizat ANRE tip IE Gr.2A+B</span></td></tr>
+            <tr><td>Data executării lucrării</td><td>15.03.2025</td></tr>
+            <tr><td>Data întocmirii PV</td><td>15.03.2025 (înainte de acoperire)</td></tr>
+          </table>
+
+          <h4 class="sub">1. Descrierea lucrării ascunse</h4>
+          <p style="font-size:12px;font-family:var(--mono);line-height:1.8;">
+            S-a executat priza de pământ artificială conform planșei IE-04 din proiect, compusă din:<br>
+            — 3 electrozi verticali din oțel zincat OL-Zn Ø50×2500 mm, bătuți la adâncimea de 2,5 m față de CTN<br>
+            — Platbandă orizontală de legătură OL-Zn 40×4 mm, pozată îngropat la adâncimea de 0,80 m față de CTN<br>
+            — Conductă de racordare la tabloul de distribuție: conductor CYY 1×35 mm²<br>
+            — Lungimea totală platbandă: 12,5 m; distanța dintre electrozi: 4,0 m<br>
+            — Localizare: zona nordică a clădirii, conform planșei de situație IE-04<br>
+            <br>
+            <em class="norm-note">I7-2011 pct.5.2.1: electrozii verticali se bat la min. 0,5 m de fundații; distanța min. între electrozi = 2× lungimea electrodului</em>
+          </p>
+
+          <h4 class="sub">2. Măsurătoare rezistență priză de pământ</h4>
+          <table class="meas-table">
+            <thead>
+              <tr>
+                <th>Parametru</th>
+                <th>Valoare prescrisă (proiect)</th>
+                <th>Valoare măsurată</th>
+                <th>Aparatul de măsură</th>
+                <th>Concluzie</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rezistența de dispersie a prizei de pământ (R)</td>
+                <td>≤ 1 Ω (sistem TN-S)</td>
+                <td class="val-ok">0,72 Ω</td>
+                <td>Telumetru FLUKE 1625-2 GEO, nr. serie 9876543, verificat metrologic 01.2025</td>
+                <td><span class="concl-ok">ADMIS</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="conf-box">
+            <h4>Condiții pentru ADMIS:</h4>
+            <ul>
+              <li>Valoarea măsurată (0,72 Ω) este sub limita din proiect (≤ 1 Ω) ✓</li>
+              <li>Metoda de măsurare: 3 borne (Wenner), conform PE 116/97 pct.3.5 ✓</li>
+              <li>Aparatul are verificare metrologică în termen ✓</li>
+              <li>PV semnat înainte de acoperire ✓</li>
+            </ul>
+          </div>
+          <div style="margin-top:10px;font-size:12px;font-family:var(--mono);">
+            <em class="norm-note">PE 116/97 pct.3.5.1: măsurarea rezistenței de dispersie se face prin metoda celor 3 borne (metoda Wenner), pe vreme uscată, cu sol la umiditate normală; se acceptă corecție pentru umiditate conform tabelului din normativ</em><br>
+            <em class="norm-note">I7-2011 pct.5.2.2: pentru sisteme TN, valoarea rezistenței prizei de pământ nu trebuie să depășească valoarea indicată în proiect; pentru sisteme TT cu DDR Idn ≤ 300mA, R ≤ 50V / Idn</em>
+          </div>
+
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label><span data-field="electrician-sig">Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai · aut. nr. 12345</span></label></div>
+            <div class="sig-field"><div class="sig-line"></div><label><span data-field="beneficiar-sig">Beneficiar / Reprezentant<br>SC CONSTRUCT PREMIUM SRL</span></label></div>
+            <div class="sig-field"><div class="sig-line"></div><label><span data-field="diriginte-sig">Diriginte de șantier (dacă există)<br>Georgescu Maria · autorizație IS nr. 789</span></label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NECONFORM -->
+      <div id="pam-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red);">PROCES-VERBAL DE LUCRĂRI ASCUNSE — EXEMPLU NECONFORMITATE<br><span style="font-size:12px;font-weight:400;">Priză de pământ artificială</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect / Lucrare</td><td>Instalație electrică interioară — Bloc locuințe P+4E, Str. Electricienilor nr. 12, Iași</td></tr>
+            <tr><td>Executant</td><td>SC ELECTRO EXECUȚIE SRL — Electrician autorizat ANRE Gr.2A+B: Ionescu Mihai</td></tr>
+            <tr><td>Data întocmirii PV</td><td style="color:var(--red);font-weight:600;">22.03.2025 ← PROBLEMĂ: priza a fost acoperită pe 15.03. — PV retroactiv!</td></tr>
+          </table>
+
+          <h4 class="sub">2. Măsurătoare rezistență priză de pământ</h4>
+          <table class="meas-table">
+            <thead>
+              <tr>
+                <th>Parametru</th>
+                <th>Valoare prescrisă</th>
+                <th>Valoare măsurată</th>
+                <th>Aparatul de măsură</th>
+                <th>Concluzie</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rezistența de dispersie</td>
+                <td>≤ 1 Ω</td>
+                <td class="val-bad">6,8 Ω</td>
+                <td>Telumetru FLUKE 1625-2, verificat metrologic <span class="val-bad">08.2022 — EXPIRAT!</span></td>
+                <td><span class="concl-bad">RESPINS</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Neconformități identificate în acest exemplu:</h4>
+            <ul>
+              <li>R = 6,8 Ω depășește limita din proiect (≤ 1 Ω) — NECONFORMITATE MAJORĂ → priza trebuie remediată (electrozi suplimentari sau tratare chimică sol)</li>
+              <li>PV întocmit retroactiv (după acoperire) — lucrarea ascunsă nu poate fi verificată vizual → NULITATE PROCEDURALĂ conform Leg.10/1995 art.22</li>
+              <li>Aparatul de măsură are verificarea metrologică expirată (08.2022) → rezultatul nu este valid din punct de vedere legal conform Leg.31/2006</li>
+              <li>PV semnat doar de executant, fără semnătura beneficiarului/dirigintelui → document incomplet</li>
+            </ul>
+          </div>
+          <div style="margin-top:8px;font-size:12px;font-family:var(--mono);">
+            <em class="norm-note">Leg.10/1995 art.22 lit.f: executantul răspunde pentru realizarea lucrărilor de construcții conform documentației de execuție; PV-urile de lucrări ascunse sunt obligatorii și se semnează înainte de acoperire</em><br>
+            <em class="norm-note">I7-2011 pct.7.3.5: dacă valoarea rezistenței prizei de pământ nu se încadrează în valoarea prescrisă, se continuă cu electrozi suplimentari sau tratarea solului și se remăsoară</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /pv-pam -->
+
+<!-- ===================== PV LUCRĂRI ASCUNSE — TRASEE ===================== -->
+<div id="pv-trasee" class="tab-panel">
+  <div class="section-note">Se întocmește câte un PV pentru fiecare traseu sau porțiune de instalație care se acoperă (șapă, tencuială, zidărie, tavan fals). Schiță de traseu obligatorie.</div>
+  <div class="card">
+    <div class="card-header"><h3>Versiune document</h3></div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('tr','admis',this)">✓ CONFORMĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('tr','neconf',this)">✕ NECONFORMĂ</button>
+      </div>
+
+      <div id="tr-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">PROCES-VERBAL DE LUCRĂRI ASCUNSE<br><span style="font-size:12px;font-weight:400;">Trasee de cabluri îngropate în șapă / tencuială</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect / Lucrare</td><td><span data-field="obiect">Instalație electrică interioară — Bloc locuințe P+4E, Str. Electricienilor nr. 12, Iași</span></td></tr>
+            <tr><td>Beneficiar</td><td><span data-field="beneficiar">SC CONSTRUCT PREMIUM SRL, CUI 123456789</span></td></tr>
+            <tr><td>Executant</td><td><span data-field="executant">SC ELECTRO EXECUȚIE SRL — Electrician autorizat: Ionescu Mihai</span></td></tr>
+            <tr><td>Planșa de referință</td><td>IE-03: Plan instalații parter — scara 1:50</td></tr>
+            <tr><td>Data execuției traseelor</td><td>18.03.2025</td></tr>
+            <tr><td>Data întocmirii PV</td><td>18.03.2025 (înainte de turnarea șapei)</td></tr>
+          </table>
+
+          <h4 class="sub">1. Descrierea traseelor executate</h4>
+          <table class="meas-table">
+            <thead>
+              <tr><th>Circuit</th><th>De la</th><th>La</th><th>Tip cablu</th><th>Secțiune</th><th>Tub protecție</th><th>Adâncime pozare</th><th>Lung. (m)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>C1 — Prize living</td><td>Tablou PT (borne C1)</td><td>Doze D1, D2, D3</td><td>CYYF 3×2,5 mm²</td><td>2,5 mm²</td><td>IPY Ø20 gri, cls.IK08</td><td class="val-ok">min. 50 mm (șapă)</td><td>14,5</td></tr>
+              <tr><td>C2 — Lumini dormitor 1</td><td>Tablou PT (borne C2)</td><td>Doze D4, D5, D6</td><td>CYYF 3×1,5 mm²</td><td>1,5 mm²</td><td>IPY Ø16 gri, cls.IK08</td><td class="val-ok">min. 50 mm (tencuială)</td><td>8,2</td></tr>
+              <tr><td>C3 — Priză baie (zona umedă)</td><td>Tablou PT (borne C3)</td><td>Doze D7, D8</td><td>CYYF 3×2,5 mm²</td><td>2,5 mm²</td><td>IPY Ø20 gri, cls.IK08</td><td class="val-ok">min. 50 mm</td><td>5,8</td></tr>
+            </tbody>
+          </table>
+          <div class="conf-box">
+            <h4>Condiții verificate:</h4>
+            <ul>
+              <li>Toate cablurile sunt în tub de protecție, continuu, fără înnădiri în tub ✓</li>
+              <li>Adâncimea de pozare min. 50 mm în șapă / tencuială ✓</li>
+              <li>Culorile conductorilor respectă standardul: L=maro/negru, N=albastru, PE=galben-verde ✓</li>
+              <li>Cablurile au DoP (declarație de performanță) și marcaj CE ✓</li>
+            </ul>
+          </div>
+          <p style="font-size:12px;font-family:var(--mono);margin-top:8px;">
+            <em class="norm-note">I7-2011 pct.5.1.5: conductoarele îngropate în pereți sau planșee vor fi protejate în tuburi; adâncimea min. de acoperire: 50 mm în șapă, 20 mm în tencuială (cu protecție mecanică suplimentară)</em><br>
+            <em class="norm-note">SR EN 60364-5-51:2009 tabel 51A: culorile de identificare ale conductorilor: PE = galben-verde (OBLIGATORIU), N = albastru deschis, L = maro / negru / gri</em>
+          </p>
+          <h4 class="sub">2. Schiță de traseu (descriere sumară în lipsa anexei grafice)</h4>
+          <p style="font-size:12px;font-family:var(--mono);">Se anexează schiță pe planul de arhitectură cu traseele marcate cu marker roșu. Schiță nr. PV-03-18032025, semnată și ștampilată.</p>
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label>Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Beneficiar / Reprezentant<br>SC CONSTRUCT PREMIUM SRL</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Diriginte de șantier (dacă există)</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tr-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red)">PV LUCRĂRI ASCUNSE — TRASEE — EXEMPLU NECONFORMITATE</div>
+          <h4 class="sub">Exemple de neconformități cu valori</h4>
+          <table class="meas-table">
+            <thead><tr><th>Circuit</th><th>Abatere constatată</th><th>Valoare neconformă</th><th>Limita normativă</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>C1 — Prize living</td>
+                <td>Cablu pozat direct în șapă, fără tub de protecție</td>
+                <td class="val-bad">Fără tub IPY</td>
+                <td>Tub IPY obligatoriu</td>
+                <td><span class="concl-bad">RESPINS</span></td>
+              </tr>
+              <tr>
+                <td>C2 — Lumini dormitor</td>
+                <td>Adâncime de pozare insuficientă în tencuială</td>
+                <td class="val-bad">18 mm (sub tencuială)</td>
+                <td>Min. 50 mm în șapă / 20 mm tencuială + protecție mecanică</td>
+                <td><span class="concl-bad">RESPINS</span></td>
+              </tr>
+              <tr>
+                <td>C3 — Priză baie</td>
+                <td>Culori greșite: conductorul PE este negru în loc de galben-verde</td>
+                <td class="val-bad">PE negru</td>
+                <td>PE = galben-verde obligatoriu (SR EN 60364-5-51)</td>
+                <td><span class="concl-bad">RESPINS</span></td>
+              </tr>
+              <tr>
+                <td>General</td>
+                <td>PV întocmit fără schiță de traseu anexată</td>
+                <td class="val-bad">Fără schiță</td>
+                <td>Schiță obligatorie (lucrare ascunsă neidentificabilă ulterior)</td>
+                <td><span class="concl-bad">NECOMPLET</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Consecințe neconformități:</h4>
+            <ul>
+              <li>Cablul fără tub: solicitare mecanică directă + imposibilitate de înlocuire fără demolare</li>
+              <li>Adâncime insuficientă: risc de deteriorare mecanică la lucrări viitoare (prize, tablouri)</li>
+              <li>Culoare greșită PE: risc de confuzie cu conductorul de fază → pericol electric mortal</li>
+              <li>Fără schiță: traseele nu pot fi identificate la intervenții viitoare → vandalism accidental</li>
+            </ul>
+          </div>
+          <div style="margin-top:8px;font-size:12px;font-family:var(--mono);">
+            <em class="norm-note">I7-2011 pct.5.1.7: înnăditurile conductorilor se fac numai în cutii sau doze accesibile; sunt interzise înnăditurile în interiorul tuburilor sau conductelor</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /pv-trasee -->
+
+<!-- ===================== BULETIN IZOLAȚIE ===================== -->
+<div id="bul-izol" class="tab-panel">
+  <div class="section-note">Se măsoară ÎNAINTE de punerea sub tensiune, cu receptoarele deconectate și siguranțele scoase. Tensiunea de test: 500V DC pentru instalații 230/400V.</div>
+  <div class="card">
+    <div class="card-header"><h3>Buletin de Verificare — Rezistența de Izolație</h3></div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('iz','admis',this)">✓ CONFORMĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('iz','neconf',this)">✕ NECONFORMĂ</button>
+      </div>
+
+      <div id="iz-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">BULETIN DE VERIFICARE<br><span style="font-size:12px;font-weight:400;">Rezistența de izolație a circuitelor electrice</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect</td><td><span data-field="obiect">Instalație electrică interioară — Bloc P+4E, Str. Electricienilor nr. 12, Iași</span></td></tr>
+            <tr><td>Executant / verificator</td><td><span data-field="electrician-full">Ionescu Mihai — Electrician autorizat ANRE Gr.2A+B, autorizație nr. 12345</span></td></tr>
+            <tr><td>Data măsurătorii</td><td>20.03.2025, ora 09:30</td></tr>
+            <tr><td>Temperatura ambiantă</td><td>18°C · Umiditate relativă: 55%</td></tr>
+            <tr><td>Tensiunea de test</td><td>500V DC (pentru sisteme cu Un ≤ 500V)</td></tr>
+            <tr><td>Aparatul de măsură</td><td>Megohmetru FLUKE 1587FC, nr. serie 123456, verificat metrologic 03.2025, valabil 03.2026</td></tr>
+            <tr><td>Starea instalației la test</td><td>Receptoarele DECONECTATE · Siguranțele SCOASE · Tabloul dezactivat de la DEE</td></tr>
+          </table>
+          <em class="norm-note">SR EN 60364-6:2016 pct.6.4.3.3: rezistența de izolație se măsoară cu tensiunea de test de 500V DC pentru circuite cu tensiune nominală ≤ 500V; valoarea minimă admisă: 1 MΩ</em>
+          <br><em class="norm-note">SR EN 61557-2:2019: aparatele de măsurare a rezistenței de izolație trebuie să respecte clasa de precizie conform standardului; verificarea metrologică este obligatorie</em>
+
+          <h4 class="sub" style="margin-top:14px;">Rezultate măsurători</h4>
+          <table class="meas-table">
+            <thead>
+              <tr><th>Circuit</th><th>Descriere</th><th>L-N (MΩ)</th><th>L-PE (MΩ)</th><th>N-PE (MΩ)</th><th>Valoare min.</th><th>Concluzie</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>C1</td><td>Prize living / sufragerie</td><td class="val-ok">125</td><td class="val-ok">248</td><td class="val-ok">310</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C2</td><td>Lumini living / hol</td><td class="val-ok">380</td><td class="val-ok">425</td><td class="val-ok">290</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C3</td><td>Prize dormitor 1</td><td class="val-ok">215</td><td class="val-ok">330</td><td class="val-ok">400</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C4</td><td>Prize dormitor 2</td><td class="val-ok">180</td><td class="val-ok">270</td><td class="val-ok">350</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C5</td><td>Prize baie (zonă umedă)</td><td class="val-ok">95</td><td class="val-ok">140</td><td class="val-ok">120</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C6</td><td>Mașină de spălat / aragaz</td><td class="val-ok">520</td><td class="val-ok">600</td><td class="val-ok">490</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C7</td><td>Lumini dormitoare / baie</td><td class="val-ok">340</td><td class="val-ok">410</td><td class="val-ok">380</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="conf-box"><h4>Concluzii generale:</h4><ul><li>Toate circuitele prezintă rezistența de izolație peste 1 MΩ ✓</li><li>Instalația este APT de punere sub tensiune din punct de vedere al izolației ✓</li></ul></div>
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label>Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai · nr. aut. 12345</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Beneficiar</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Data<br>20.03.2025</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="iz-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red)">BULETIN IZOLAȚIE — EXEMPLU NECONFORMITATE</div>
+          <table class="meas-table">
+            <thead><tr><th>Circuit</th><th>L-N (MΩ)</th><th>L-PE (MΩ)</th><th>N-PE (MΩ)</th><th>Valoare min.</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr><td>C1 — Prize living</td><td class="val-ok">125</td><td class="val-ok">248</td><td class="val-ok">310</td><td>≥ 1 MΩ</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C5 — Prize baie</td><td class="val-bad">0,42</td><td class="val-bad">0,38</td><td class="val-ok">2,1</td><td>≥ 1 MΩ</td><td><span class="concl-bad">RESPINS</span></td></tr>
+              <tr><td>C6 — Mașină spălat</td><td class="val-bad">0,75</td><td class="val-ok">1,8</td><td class="val-ok">3,2</td><td>≥ 1 MΩ</td><td><span class="concl-bad">RESPINS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Neconformități și cauze probabile:</h4>
+            <ul>
+              <li>C5 (baie): Riz L-N = 0,42 MΩ — sub 1 MΩ → MOTIV PROBABIL: umezeală reziduală în doze / cablu deteriorat mecanic la pozare</li>
+              <li>C6 (mașina de spălat): Riz L-N = 0,75 MΩ — sub 1 MΩ → MOTIV PROBABIL: izolație deteriorată la strecurarea prin orificiu metalic fără protecție</li>
+              <li>ACȚIUNE OBLIGATORIE: circuitele C5 și C6 nu se pun sub tensiune → identificare defect, remediere, remăsurare</li>
+            </ul>
+          </div>
+          <em class="norm-note">I7-2011 pct.7.3.3: dacă valoarea rezistenței de izolație a unui circuit este mai mică de 1 MΩ, se identifică și înlătură cauza defecțiunii și se remăsoară înainte de punerea sub tensiune</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /bul-izol -->
+
+<!-- ===================== BULETIN CONTINUITATE PE ===================== -->
+<div id="bul-pe" class="tab-panel">
+  <div class="section-note">Se verifică continuitatea fiecărui conductor PE de la priză/aparat până la bara PE din tablou. Valoare maximă admisă: &lt; 1 Ω.</div>
+  <div class="card">
+    <div class="card-header"><h3>Buletin de Verificare — Continuitatea Conductorilor de Protecție (PE)</h3></div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('pe','admis',this)">✓ CONFORMĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('pe','neconf',this)">✕ NECONFORMĂ</button>
+      </div>
+
+      <div id="pe-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">BULETIN DE VERIFICARE<br><span style="font-size:12px;font-weight:400;">Continuitatea conductorilor de protecție (PE) și a legăturilor echipotenţiale</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect</td><td>Instalație electrică interioară — Bloc P+4E, Str. Electricienilor nr. 12, Iași</td></tr>
+            <tr><td>Data</td><td>20.03.2025, ora 08:00 (înainte de punerea sub tensiune)</td></tr>
+            <tr><td>Aparatul de măsură</td><td>Multimetru FLUKE 175, nr. serie 654321, verificat metrologic 01.2025, valabil 01.2026</td></tr>
+            <tr><td>Metoda</td><td>Măsurare cu curent de test ≥ 200 mA, tensiune ≤ 4V (conform SR EN 61557-4)</td></tr>
+          </table>
+          <em class="norm-note">SR EN 60364-6:2016 pct.6.4.3.2: continuitatea conductorilor de protecție trebuie verificată prin măsurare; se include proba de continuitate a tuturor legăturilor echipotenţiale</em><br>
+          <em class="norm-note">I7-2011 pct.7.3.2: rezistența ohmică a conductorului de protecție PE, măsurată de la priza de pământ la cel mai îndepărtat punct al instalației, nu va depăși 1 Ω</em>
+
+          <h4 class="sub" style="margin-top:14px;">Conductori de protecție (PE) — circuite</h4>
+          <table class="meas-table">
+            <thead><tr><th>Punct de măsurare</th><th>De la</th><th>La</th><th>Secțiune PE</th><th>Rezistență (Ω)</th><th>Limita (Ω)</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr><td>C1 — Priză living (cea mai îndepărtată)</td><td>Bara PE tablou</td><td>Borna PE priză D3</td><td>2,5 mm²</td><td class="val-ok">0,21</td><td>&lt; 1 Ω</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C5 — Priză baie (cea mai îndepărtată)</td><td>Bara PE tablou</td><td>Borna PE priză D8</td><td>2,5 mm²</td><td class="val-ok">0,34</td><td>&lt; 1 Ω</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C6 — Mașină de spălat</td><td>Bara PE tablou</td><td>Borna PE prize C6</td><td>2,5 mm²</td><td class="val-ok">0,18</td><td>&lt; 1 Ω</td><td><span class="concl-ok">ADMIS</span></td></tr>
+            </tbody>
+          </table>
+
+          <h4 class="sub">Legături echipotenţiale (baie)</h4>
+          <table class="meas-table">
+            <thead><tr><th>Element conectat</th><th>La bara echipotenţială</th><th>Rezistență (Ω)</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr><td>Cazan / boiler electric</td><td>Bara echipotenţ. baie</td><td class="val-ok">0,08</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>Cadă metalică / robinete</td><td>Bara echipotenţ. baie</td><td class="val-ok">0,12</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>Radiatoare (conducte metalice)</td><td>Bara echipotenţ. baie</td><td class="val-ok">0,09</td><td><span class="concl-ok">ADMIS</span></td></tr>
+            </tbody>
+          </table>
+          <em class="norm-note">SR EN 60364-4-41:2007 pct.415.2: legăturile echipotenţiale suplimentare se aplică în locurile cu pericol crescut (băi, bucătării, industrie); se conectează toate masele metalice simultan accesibile</em>
+
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label>Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Beneficiar</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Data / 20.03.2025</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pe-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red)">BULETIN CONTINUITATE PE — NECONFORMITATE</div>
+          <table class="meas-table">
+            <thead><tr><th>Punct de măsurare</th><th>Rezistență (Ω)</th><th>Limita</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr><td>C1 — Priză living</td><td class="val-ok">0,21</td><td>&lt; 1 Ω</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C5 — Priză birou</td><td class="val-bad">2,4</td><td>&lt; 1 Ω</td><td><span class="concl-bad">RESPINS</span></td></tr>
+              <tr><td>C6 — Mașină spălat</td><td class="val-bad">Conductă întreruptă — ∞ Ω</td><td>&lt; 1 Ω</td><td><span class="concl-bad">RESPINS</span></td></tr>
+              <tr><td>Cadă metalică (echipotenţial)</td><td class="val-bad">1,85</td><td>&lt; 1 Ω</td><td><span class="concl-bad">RESPINS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Cauze probabile și acțiuni corective:</h4>
+            <ul>
+              <li>C5 (2,4 Ω): conductorul PE a trecut prin o clemă oxidată / conexiune slabă în doze — ACȚIUNE: inspectat fiecare punct de conexiune, restrâns și remăsurat</li>
+              <li>C6 (∞ Ω): conductorul PE este ÎNTRERUPT — PERICOL ELECTRIC GRAV: mașina de spălat fără protecție → INTERZISĂ punerea sub tensiune</li>
+              <li>Cadă (1,85 Ω): conductor de echipotenţializare subdimensionat (1 mm² în loc de min. 2,5 mm² conform proiect)</li>
+            </ul>
+          </div>
+          <em class="norm-note">SR EN 60364-4-41:2007 pct.411.3.1.1: dacă conductorul PE este întrerupt sau are rezistență excesivă, protecția împotriva șocurilor electrice este compromisă; punerea sub tensiune este interzisă</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /bul-pe -->
+
+<!-- ===================== BULETIN DDR ===================== -->
+<div id="bul-ddr" class="tab-panel">
+  <div class="section-note">Se testează după punerea sub tensiune, cu sarcina deconectată. Se verifică curentul de declanșare, timpul de declanșare și butonul TEST pentru fiecare DDR.</div>
+  <div class="card">
+    <div class="card-header"><h3>Buletin de Verificare — Dispozitive Diferențiale de Curent Rezidual (DDR/RCD)</h3></div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('ddr','admis',this)">✓ CONFORMĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('ddr','neconf',this)">✕ NECONFORMĂ</button>
+      </div>
+
+      <div id="ddr-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">BULETIN DE VERIFICARE<br><span style="font-size:12px;font-weight:400;">Dispozitive diferențiale de curent rezidual (DDR / RCD)</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect</td><td><span data-field="obiect">Instalație electrică interioară — Bloc P+4E, Str. Electricienilor nr. 12, Iași</span></td></tr>
+            <tr><td>Data</td><td>21.03.2025, ora 10:00 (instalație sub tensiune, receptoare deconectate)</td></tr>
+            <tr><td>Aparatul de măsură</td><td>Metrel Eurotest XA MI 3102H, nr. serie 234567, verificat metrologic 02.2025, valabil 02.2026</td></tr>
+          </table>
+          <em class="norm-note">SR EN 60364-4-41:2007 pct.411.3.3: DDR cu IΔn ≤ 30 mA este cerut pe circuitele de prize cu curent nominal ≤ 20A în locuri accesibile persoanelor; declanșarea la 230V la curent diferențial de defect</em><br>
+          <em class="norm-note">SR EN 60364-6:2016 pct.6.4.3.7: verificarea DDR include: testul de continuitate, testul de declanșare la IΔn și 5IΔn, și verificarea butonului de test; timpul max. la IΔn: 300 ms; la 5IΔn: 40 ms</em>
+
+          <h4 class="sub" style="margin-top:14px;">Rezultate verificare DDR</h4>
+          <table class="meas-table">
+            <thead>
+              <tr><th>DDR</th><th>Tip / IΔn</th><th>Circuit protejat</th><th>I test (mA)</th><th>Curent decl. (mA)</th><th>Timp decl. (ms)</th><th>Limite</th><th>Test buton</th><th>Concluzie</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>DDR1</td><td>Bipolar / 30 mA / Tip A</td><td>C1 — Prize living</td><td>30</td><td class="val-ok">22</td><td class="val-ok">24</td><td>≤30mA / ≤300ms</td><td class="val-ok">OK</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>DDR2</td><td>Bipolar / 30 mA / Tip A</td><td>C2 — Prize dormitoare</td><td>30</td><td class="val-ok">25</td><td class="val-ok">31</td><td>≤30mA / ≤300ms</td><td class="val-ok">OK</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>DDR3</td><td>Bipolar / 30 mA / Tip A</td><td>C3 — Prize baie (zonă umedă)</td><td>30</td><td class="val-ok">18</td><td class="val-ok">19</td><td>≤30mA / ≤300ms</td><td class="val-ok">OK</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>DDR4</td><td>Tetrapolar / 300 mA / Tip A</td><td>Protecție generală tablou (incendiu)</td><td>300</td><td class="val-ok">210</td><td class="val-ok">85</td><td>≤300mA / ≤300ms</td><td class="val-ok">OK</td><td><span class="concl-ok">ADMIS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="conf-box"><h4>Concluzii:</h4><ul><li>Toate DDR-urile declanșează sub curentul nominal IΔn și în timp sub 300 ms ✓</li><li>Butoanele TEST funcționează pe toate dispozitivele ✓</li><li>Instalația este APTĂ de exploatare din punct de vedere al protecției diferențiale ✓</li></ul></div>
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label>Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Beneficiar</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Data / 21.03.2025</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="ddr-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red)">BULETIN DDR — EXEMPLU NECONFORMITATE</div>
+          <table class="meas-table">
+            <thead><tr><th>DDR</th><th>IΔn</th><th>Curent decl. (mA)</th><th>Timp decl. (ms)</th><th>Test buton</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr><td>DDR1</td><td>30 mA</td><td class="val-ok">22 mA</td><td class="val-ok">24 ms</td><td class="val-ok">OK</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>DDR3</td><td>30 mA</td><td class="val-bad">35 mA → NU declanșează la IΔn!</td><td class="val-bad">–</td><td class="val-bad">NU funcționează</td><td><span class="concl-bad">RESPINS</span></td></tr>
+              <tr><td>DDR2</td><td>30 mA</td><td class="val-ok">28 mA</td><td class="val-bad">380 ms → depășește 300 ms!</td><td class="val-ok">OK</td><td><span class="concl-bad">RESPINS</span></td></tr>
+              <tr><td>DDR4</td><td>300 mA</td><td class="val-ok">240 mA</td><td class="val-ok">120 ms</td><td class="val-ok">OK</td><td><span class="concl-ok">ADMIS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Neconformități și pericole:</h4>
+            <ul>
+              <li>DDR3: nu declanșează la curentul de defect IΔn = 30 mA → dispozitiv defect sau setare incorectă → INTERZISĂ exploatarea → înlocuire obligatorie</li>
+              <li>DDR3: butonul TEST nu funcționează → confirmare dispozitiv defect → înlocuire obligatorie</li>
+              <li>DDR2: timp de declanșare 380 ms depășește 300 ms → dispozitiv îmbătrânit / defect → înlocuire și retestare</li>
+            </ul>
+          </div>
+          <em class="norm-note">SR EN 60364-4-41:2007 pct.411.3.2: DDR trebuie să declanșeze la curentul de defect IΔn în max. 300 ms; un DDR care nu declanșează la curentul nominal nu asigură protecția persoanelor și trebuie înlocuit</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /bul-ddr -->
+
+<!-- ===================== BULETIN BUCLĂ DEFECT ZS ===================== -->
+<div id="bul-zs" class="tab-panel">
+  <div class="section-note">Zs = impedanța buclei de defect = Z(sursă) + Z(conductor fază) + Z(conductor PE). Condiție: Zs ≤ Uo / Ia, unde Ia este curentul de declanșare al protecției în max. 0,4 s.</div>
+  <div class="card">
+    <div class="card-header"><h3>Buletin de Verificare — Impedanța Buclei de Defect (Zs)</h3></div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('zs','admis',this)">✓ CONFORMĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('zs','neconf',this)">✕ NECONFORMĂ</button>
+      </div>
+
+      <div id="zs-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">BULETIN DE VERIFICARE<br><span style="font-size:12px;font-weight:400;">Impedanța buclei de defect (Zs) — verificarea eficacității protecției prin deconectare automată</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect</td><td>Instalație electrică interioară — Bloc P+4E, Str. Electricienilor nr. 12, Iași</td></tr>
+            <tr><td>Sistem de distribuție</td><td>TN-S (conductor PE separat de N pe toată lungimea)</td></tr>
+            <tr><td>Data</td><td>21.03.2025, ora 11:30 (instalație sub tensiune)</td></tr>
+            <tr><td>Tensiunea nominală (Uo)</td><td>230 V (fază - nul)</td></tr>
+            <tr><td>Aparatul de măsură</td><td>Metrel Eurotest XA MI 3102H, nr. serie 234567, verificat metrologic 02.2025</td></tr>
+            <tr><td>Metoda de măsurare</td><td>Măsurare directă cu tester loop, la cel mai îndepărtat punct al fiecărui circuit</td></tr>
+          </table>
+          <em class="norm-note">SR EN 60364-4-41:2007 pct.411.4.5: condiția de protecție prin deconectare automată în sistemul TN este Zs × Ia ≤ Uo, unde Uo = 230V, Ia = curentul care asigură deconectarea în 0,4s pentru circuite terminale de prize, 5s pentru circuite de distribuție</em><br>
+          <em class="norm-note">SR EN 60364-6:2016 pct.6.4.3.6: măsurarea impedanței buclei de defect se face cu instalația sub tensiune și sarcina conectată; se consemnează valoarea Zs măsurată și se compară cu Zs maxim admis din SR EN 60364-4-41 Tabel 41.1</em>
+
+          <h4 class="sub" style="margin-top:14px;">Rezultate — Circuite terminale (prize 230V, t deconectare = 0,4s)</h4>
+          <table class="meas-table">
+            <thead>
+              <tr><th>Circuit</th><th>Protecție</th><th>Ia la 0,4s (A)</th><th>Zs max admis (Ω)</th><th>Zs măsurat (Ω)</th><th>Concluzie</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>C1 — Prize living</td><td>MCB C16A</td><td>160</td><td>230/160 = <strong>1,44 Ω</strong></td><td class="val-ok">0,52</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C2 — Prize dormitor 1</td><td>MCB C16A</td><td>160</td><td><strong>1,44 Ω</strong></td><td class="val-ok">0,68</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C3 — Priză baie (circuit special)</td><td>MCB B16A</td><td>80</td><td>230/80 = <strong>2,88 Ω</strong></td><td class="val-ok">0,74</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C6 — Mașină de spălat</td><td>MCB C16A</td><td>160</td><td><strong>1,44 Ω</strong></td><td class="val-ok">0,44</td><td><span class="concl-ok">ADMIS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="conf-box"><h4>Concluzii:</h4><ul><li>Zs măsurat &lt; Zs maxim admis pe toate circuitele ✓</li><li>Deconectarea automată în caz de defect fază-PE este asigurată în max. 0,4 s ✓</li><li>Protecția împotriva șocurilor electrice prin deconectare automată este EFICACE ✓</li></ul></div>
+          <div style="margin-top:8px;font-size:12px;font-family:var(--mono);">
+            <em class="norm-note">NOTĂ DE CALCUL: MCB tip C curent nominal In: factorul de declanșare magnetică la 0,4s este 10×In; pentru C16A → Ia = 10 × 16 = 160A; Zs max = Uo/Ia = 230/160 = 1,44 Ω. MCB tip B: factor 5×In; pentru B16A → Ia = 80A → Zs max = 2,88 Ω</em>
+          </div>
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label>Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Beneficiar</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Data / 21.03.2025</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="zs-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red)">BULETIN BUCLĂ DEFECT — EXEMPLU NECONFORMITATE</div>
+          <table class="meas-table">
+            <thead><tr><th>Circuit</th><th>Protecție</th><th>Zs max admis (Ω)</th><th>Zs măsurat (Ω)</th><th>Concluzie</th></tr></thead>
+            <tbody>
+              <tr><td>C1 — Prize living</td><td>MCB C16A</td><td>1,44 Ω</td><td class="val-ok">0,52 Ω</td><td><span class="concl-ok">ADMIS</span></td></tr>
+              <tr><td>C2 — Prize dormitor 1</td><td>MCB C16A</td><td>1,44 Ω</td><td class="val-bad">1,85 Ω → depășit!</td><td><span class="concl-bad">RESPINS</span></td></tr>
+              <tr><td>C4 — Prize birou (fir lung)</td><td>MCB C10A</td><td>230/100 = 2,30 Ω</td><td class="val-bad">2,65 Ω → depășit!</td><td><span class="concl-bad">RESPINS</span></td></tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Cauze probabile și acțiuni corective:</h4>
+            <ul>
+              <li>C2 (1,85 Ω &gt; 1,44 Ω): traseul este prea lung sau secțiunea este insuficientă față de calcul → ACȚIUNI: verificat secțiunea reală a cablului; dacă secțiunea e ok → problemă de contact în conexiuni (curățat și restrâns) → remăsurat</li>
+              <li>C4 (2,65 Ω &gt; 2,30 Ω): secțiunea conductorului PE este prea mică sau există conexiune defectă; alternativ: protecția MCB C10A nu este adecvată pentru lungimea circuitului → schimbat cu MCB B10A (Ia = 50A, Zs max = 4,60 Ω) cu avizul proiectantului</li>
+              <li>PERICOL: în caz de defect pe aceste circuite, MCB nu declanșează în 0,4s → persoanele pot fi în contact cu tensiune periculoasă timp îndelungat</li>
+            </ul>
+          </div>
+          <em class="norm-note">I7-2011 pct.7.3.4: dacă impedanța buclei de defect depășește valoarea maximă admisă, se vor lua măsuri pentru reducerea impedanței (mărirea secțiunii conductorului, reducerea lungimii circuitului) sau se utilizează DDR suplimentar ca protecție de rezervă</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /bul-zs -->
+
+<!-- ===================== PV RECEPȚIE ===================== -->
+<div id="pv-rec" class="tab-panel">
+  <div class="section-note">Documentul de finalizare a lucrării. Se semnează după ce toate testele sunt finalizate și toate documentele sunt complete.</div>
+  <div class="card">
+    <div class="card-header"><h3>Proces-Verbal de Recepție la Terminarea Lucrărilor</h3></div>
+    <div class="card-body">
+      <div class="version-toggle">
+        <button class="ver-btn admis active" onclick="switchVer('rec','admis',this)">✓ RECEPȚIE ACORDATĂ</button>
+        <button class="ver-btn neconf" onclick="switchVer('rec','neconf',this)">✕ RECEPȚIE AMÂNATĂ (exemple)</button>
+      </div>
+
+      <div id="rec-admis" class="v-panel show">
+        <div class="doc-header">
+          <div class="doc-title">PROCES-VERBAL DE RECEPȚIE<br><span style="font-size:12px;font-weight:400;">La terminarea lucrărilor de instalații electrice</span></div>
+          <table class="doc-info">
+            <tr><td>Obiect</td><td>Instalație electrică interioară — Bloc locuințe P+4E, Str. Electricienilor nr. 12, Iași</td></tr>
+            <tr><td>Beneficiar</td><td>SC CONSTRUCT PREMIUM SRL, CUI 123456789, reprezentat de ing. Vasile Constantin</td></tr>
+            <tr><td>Executant</td><td>SC ELECTRO EXECUȚIE SRL, CUI 987654321, electrician autorizat ANRE Gr.2A+B: Ionescu Mihai, aut. nr. 12345</td></tr>
+            <tr><td>Proiect de execuție nr.</td><td>IE-2024-045 / elaborat de ing. Popescu Andrei, autorizat ANRE tip IE Gr.2A+B, aut. nr. 54321</td></tr>
+            <tr><td>Contract de execuție nr.</td><td>CE-2024-112 / data 10.01.2025</td></tr>
+            <tr><td>Data finalizării lucrărilor</td><td>21.03.2025</td></tr>
+            <tr><td>Data recepției</td><td>25.03.2025</td></tr>
+          </table>
+          <em class="norm-note">HG 273/1994 art.8, modificat prin HG 343/2017: recepția la terminarea lucrărilor se efectuează pentru fiecare obiect de construcție, la terminarea lucrărilor; comisia de recepție se constituie de investitor/beneficiar</em>
+
+          <h4 class="sub">1. Documente prezentate la recepție</h4>
+          <table class="meas-table">
+            <thead><tr><th>Document</th><th>Nr. / Data</th><th>Stare</th></tr></thead>
+            <tbody>
+              <tr><td>Proiect de execuție (inclusiv piese scrise și desenate)</td><td>IE-2024-045</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>PV Lucrări Ascunse — Priză pământ</td><td>PV-01 / 15.03.2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>PV Lucrări Ascunse — Trasee parter</td><td>PV-02 / 18.03.2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Buletin verificare izolație</td><td>BV-01 / 20.03.2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Buletin verificare continuitate PE</td><td>BV-02 / 20.03.2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Buletin verificare DDR</td><td>BV-03 / 21.03.2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Buletin buclă defect Zs</td><td>BV-04 / 21.03.2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Declarații de conformitate / DoP materiale</td><td>Dosar DoP-2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Scheme as-built (actualizate față de proiect)</td><td>IE-2024-045-AB</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+              <tr><td>Instrucțiuni de exploatare și întreținere</td><td>IE-Expl-2025</td><td><span class="concl-ok">PREZENTAT</span></td></tr>
+            </tbody>
+          </table>
+          <em class="norm-note">SR EN 60364-6:2016 pct.6.5: la finalizarea instalației se întocmește un raport de verificare care include rezultatele tuturor testelor, deviațiile față de standardul de referință și concluziile verificatorului</em>
+
+          <h4 class="sub">2. Constatări la recepție</h4>
+          <p style="font-size:12px;font-family:var(--mono);line-height:1.8;margin-bottom:8px;">
+            Comisia a constatat că lucrările de instalații electrice au fost executate conform proiectului nr. IE-2024-045 și respectă prevederile normativului I7-2011 și ale standardelor SR EN 60364. Toate verificările și măsurătorile prevăzute au fost efectuate și se încadrează în valorile admise. Materialele puse în operă corespund specificațiilor din proiect și au declarații de conformitate CE.
+          </p>
+
+          <h4 class="sub">3. Decizie</h4>
+          <div class="conf-box">
+            <h4>RECEPȚIA SE ACORDĂ fără obiecțiuni</h4>
+            <ul>
+              <li>Toate documentele tehnice sunt complete și conforme ✓</li>
+              <li>Toate măsurătorile se încadrează în valorile normative ✓</li>
+              <li>Instalația este aptă de exploatare normală ✓</li>
+            </ul>
+          </div>
+          <em class="norm-note">HG 273/1994 art.12: comisia de recepție poate acorda recepția fără obiecțiuni, cu obiecțiuni (cu termen de remediere) sau poate amâna recepția dacă sunt deficiențe care afectează siguranța</em>
+
+          <div class="sig-block">
+            <div class="sig-field"><div class="sig-line"></div><label>Electrician autorizat ANRE Gr.2A+B<br>Ionescu Mihai · aut. nr. 12345</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Beneficiar / Președinte comisie recepție<br>SC CONSTRUCT PREMIUM SRL</label></div>
+            <div class="sig-field"><div class="sig-line"></div><label>Diriginte de șantier (dacă există)<br>Georgescu Maria · aut. IS nr. 789</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="rec-neconf" class="v-panel">
+        <div class="doc-header" style="border-color:var(--red-border)">
+          <div class="doc-title" style="border-color:var(--red)">PV RECEPȚIE — EXEMPLE DE AMÂNARE / RESPINGERE</div>
+          <h4 class="sub">Motive frecvente de amânare a recepției și documentele lipsite</h4>
+          <table class="meas-table">
+            <thead><tr><th>Document / Verificare</th><th>Situație constatată</th><th>Consecință</th></tr></thead>
+            <tbody>
+              <tr><td>PV lucrări ascunse priză pământ</td><td class="val-bad">Lipsă — semnat retroactiv după acoperire</td><td><span class="concl-bad">RECEPȚIE AMÂNATĂ</span></td></tr>
+              <tr><td>Buletin izolație circuit C5</td><td class="val-bad">Valoare neconformă 0,42 MΩ (min. 1 MΩ)</td><td><span class="concl-bad">RECEPȚIE AMÂNATĂ</span></td></tr>
+              <tr><td>Buletin verificare DDR3</td><td class="val-bad">DDR nu declanșează la IΔn — dispozitiv defect</td><td><span class="concl-bad">RECEPȚIE AMÂNATĂ</span></td></tr>
+              <tr><td>Scheme as-built</td><td class="val-bad">Lipsă — traseele reale nu sunt documentate</td><td><span class="concl-bad">RECEPȚIE AMÂNATĂ</span></td></tr>
+              <tr><td>DoP cabluri CYYF</td><td class="val-bad">Lipsă declarație de conformitate pentru cablul CYYF 3×2,5 mm²</td><td><span class="concl-warn">OBIECȚIUNE</span></td></tr>
+              <tr><td>Autorizație ANRE electrician</td><td class="val-bad">Autorizație expirată la data execuției (expirase cu 2 luni)</td><td><span class="concl-bad">RECEPȚIE REFUZATĂ</span></td></tr>
+            </tbody>
+          </table>
+          <div class="nonconf-box">
+            <h4>Consecințe legale ale neconformităților la recepție:</h4>
+            <ul>
+              <li>Recepția amânată → beneficiarul nu poate folosi legal instalația (asigurările pot refuza daunele)</li>
+              <li>PV lucrări ascunse retroactiv → lucrarea ascunsă este considerată neverificată → demolarea și refacerea pot fi impuse de ISC</li>
+              <li>Autorizație ANRE expirată → lucrarea este ilegală; executantul răspunde penal și civil conform Leg.123/2012</li>
+              <li>DDR defect → în caz de accident electric, executantul poate fi tras la răspundere penală (vătămare corporală / deces)</li>
+            </ul>
+          </div>
+          <em class="norm-note">HG 273/1994 art.12 alin.3: în cazul în care comisia de recepție constată că nu sunt îndeplinite condițiile pentru acordarea recepției, aceasta se amână, stabilind termenele și condițiile de remediere</em><br>
+          <em class="norm-note">Leg.10/1995 art.27: persoanele fizice și juridice care execută lucrări de construcții răspund potrivit legii pe toată durata de existență a construcției pentru viciile ascunse ale construcției, ivite în termenul de garanție și după expirarea acestuia</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /pv-rec -->
+
+<script>
+/* ── Tab navigation ── */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function switchVer(prefix, ver, btn) {
+  const parent = btn.closest('.card-body');
+  parent.querySelectorAll('.v-panel').forEach(p => p.classList.remove('show'));
+  parent.querySelectorAll('.ver-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(prefix + '-' + ver).classList.add('show');
+  btn.classList.add('active');
+}
+
+/* ══════════════════════════════════════════
+   EDIT MODE
+══════════════════════════════════════════ */
+const EDITABLE_SELECTORS = [
+  'table.doc-info td:last-child',
+  '.meas-table td',
+  '.doc-header p',
+  '.check-list .item-text',
+  '.sig-field label',
+  'h4.sub',
+  '.nonconf-box ul li',
+  '.conf-box ul li',
+  '.section-note',
+  '.doc-title',
+];
+
+let editMode = false;
+
+function toggleEditMode() {
+  editMode = !editMode;
+  const btn = document.getElementById('editBtn');
+  if (editMode) {
+    document.body.classList.add('edit-mode');
+    btn.classList.add('on');
+    btn.textContent = '✏ Editare ON';
+    EDITABLE_SELECTORS.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.contentEditable = 'true';
+        el.dataset.placeholder = el.dataset.placeholder || '—';
+        el.addEventListener('input', scheduleAutoSave);
+      });
+    });
+  } else {
+    document.body.classList.remove('edit-mode');
+    btn.classList.remove('on');
+    btn.textContent = '✏ Editare';
+    EDITABLE_SELECTORS.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.contentEditable = 'false';
+      });
+    });
+    saveEdits();
+  }
+}
+
+/* ── Auto-save indicator ── */
+let saveTimer = null;
+function scheduleAutoSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveEdits, 1200);
+}
+
+function saveEdits() {
+  const edits = {};
+  EDITABLE_SELECTORS.forEach(sel => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      const key = sel + '::' + i;
+      edits[key] = el.innerHTML;
+    });
+  });
+  try { localStorage.setItem('anre_edits', JSON.stringify(edits)); } catch(e){}
+}
+
+function loadEdits() {
+  try {
+    const raw = localStorage.getItem('anre_edits');
+    if (!raw) return;
+    const edits = JSON.parse(raw);
+    EDITABLE_SELECTORS.forEach(sel => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        const key = sel + '::' + i;
+        if (edits[key] !== undefined) el.innerHTML = edits[key];
+      });
+    });
+  } catch(e){}
+}
+
+/* ══════════════════════════════════════════
+   ANNOTATION SYSTEM
+══════════════════════════════════════════ */
+let annoMode = false;
+let pendingRange = null;
+let currentAnnoMark = null;
+let annotations = [];   // [{id, excerpt, text, date}]
+
+function toggleAnnoMode() {
+  annoMode = !annoMode;
+  const btn = document.getElementById('annoModeBtn');
+  btn.textContent = annoMode ? '📌 Notare ON' : '📌 Mod Notare';
+  btn.style.background = annoMode ? '#854d0e' : '#1e40af';
+  if (!annoMode) document.getElementById('annoTooltip').style.display = 'none';
+}
+
+/* Show tooltip on text selection when anno mode is on */
+document.addEventListener('mouseup', function(e) {
+  const tooltip = document.getElementById('annoTooltip');
+  if (!annoMode) { tooltip.style.display = 'none'; return; }
+  if (e.target.closest('.floating-toolbar') || e.target.closest('.anno-dialog') ||
+      e.target.closest('.notes-panel')) return;
+
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || sel.toString().trim().length < 2) {
+    tooltip.style.display = 'none';
+    return;
+  }
+  pendingRange = sel.getRangeAt(0).cloneRange();
+  const rect = sel.getRangeAt(0).getBoundingClientRect();
+  tooltip.style.display = 'block';
+  tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
+  tooltip.style.top  = (rect.top - 42 + window.scrollY) + 'px';
+});
+
+document.addEventListener('mousedown', function(e) {
+  const bubble = document.getElementById('annoBubble');
+  if (!e.target.closest('.anno-bubble') && !e.target.closest('.anno-num') && !e.target.closest('.anno-mark')) {
+    bubble.style.display = 'none';
+  }
+  if (!e.target.closest('.anno-tooltip') && !e.target.closest('.anno-dialog')) {
+    document.getElementById('annoTooltip').style.display = 'none';
+  }
+});
+
+function openAnnoDialog() {
+  if (!pendingRange) return;
+  document.getElementById('annoTooltip').style.display = 'none';
+  document.getElementById('annoDialog').style.display = 'block';
+  document.getElementById('annoOverlay').style.display = 'block';
+  document.getElementById('annoInput').value = '';
+  setTimeout(() => document.getElementById('annoInput').focus(), 50);
+}
+
+document.getElementById('annoOverlay').addEventListener('click', cancelAnno);
+document.getElementById('annoInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) confirmAnno();
+  if (e.key === 'Escape') cancelAnno();
+});
+
+function cancelAnno() {
+  document.getElementById('annoDialog').style.display = 'none';
+  document.getElementById('annoOverlay').style.display = 'none';
+  pendingRange = null;
+  window.getSelection()?.removeAllRanges();
+}
+
+function confirmAnno() {
+  const text = document.getElementById('annoInput').value.trim();
+  if (!text || !pendingRange) { cancelAnno(); return; }
+
+  const id = 'anno-' + Date.now();
+  const num = annotations.length + 1;
+  const excerpt = pendingRange.toString().slice(0, 60) + (pendingRange.toString().length > 60 ? '…' : '');
+  const date = new Date().toLocaleDateString('ro-RO', {day:'2-digit',month:'2-digit',year:'numeric'});
+
+  /* Wrap selected text */
+  try {
+    const mark = document.createElement('mark');
+    mark.className = 'anno-mark';
+    mark.dataset.annoId = id;
+    pendingRange.surroundContents(mark);
+
+    const badge = document.createElement('sup');
+    badge.className = 'anno-num';
+    badge.textContent = num;
+    badge.dataset.annoId = id;
+    badge.onclick = function(e) { e.stopPropagation(); showAnnoBubble(id, e); };
+    mark.onclick = function(e) { showAnnoBubble(id, e); };
+    mark.insertAdjacentElement('afterend', badge);
+  } catch(e) {
+    /* Complex selection spanning multiple elements — wrap anyway */
+    console.warn('Complex selection, skipping wrap', e);
+  }
+
+  annotations.push({ id, num, excerpt, text, date });
+  saveAnnotations();
+  renderNotesList();
+  cancelAnno();
+}
+
+function showAnnoBubble(id, e) {
+  const anno = annotations.find(a => a.id === id);
+  if (!anno) return;
+  currentAnnoMark = id;
+  const bubble = document.getElementById('annoBubble');
+  document.getElementById('abTitle').textContent = 'Notă #' + anno.num;
+  document.getElementById('abDate').textContent = anno.date;
+  document.getElementById('abText').textContent = anno.text;
+  bubble.style.display = 'block';
+  const x = Math.min(e.clientX + 10, window.innerWidth - 300);
+  const y = Math.min(e.clientY - 10, window.innerHeight - 160);
+  bubble.style.left = x + 'px';
+  bubble.style.top  = (y + window.scrollY) + 'px';
+}
+
+function deleteAnno() {
+  if (!currentAnnoMark) return;
+  const id = currentAnnoMark;
+  /* Remove mark elements */
+  document.querySelectorAll(`[data-anno-id="${id}"]`).forEach(el => {
+    if (el.tagName === 'MARK') {
+      const parent = el.parentNode;
+      while (el.firstChild) parent.insertBefore(el.firstChild, el);
+      parent.removeChild(el);
+    } else {
+      el.remove();
+    }
+  });
+  annotations = annotations.filter(a => a.id !== id);
+  saveAnnotations();
+  renderNotesList();
+  document.getElementById('annoBubble').style.display = 'none';
+}
+
+function renderNotesList() {
+  const list = document.getElementById('notesList');
+  document.getElementById('noteCount').textContent = annotations.length;
+  if (!annotations.length) {
+    list.innerHTML = '<div class="no-notes">Nicio adnotare încă.<br>Activează modul Notare și selectează text.</div>';
+    return;
+  }
+  list.innerHTML = annotations.map(a => `
+    <div class="note-item" onclick="scrollToAnno('${a.id}')">
+      <div class="note-num">
+        <button class="note-del" onclick="event.stopPropagation();deleteAnnoById('${a.id}')">✕</button>
+        Notă #${a.num}  ·  ${a.date}
+      </div>
+      <div class="note-excerpt">"${a.excerpt}"</div>
+      <div class="note-text">${a.text}</div>
+    </div>
+  `).join('');
+}
+
+function deleteAnnoById(id) {
+  currentAnnoMark = id;
+  deleteAnno();
+}
+
+function scrollToAnno(id) {
+  const el = document.querySelector(`[data-anno-id="${id}"]`);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function toggleNotesPanel() {
+  document.getElementById('notesPanel').classList.toggle('open');
+  renderNotesList();
+}
+
+/* ── Persist annotations ── */
+function saveAnnotations() {
+  try { localStorage.setItem('anre_annotations', JSON.stringify(annotations)); } catch(e){}
+}
+
+function loadAnnotations() {
+  try {
+    const raw = localStorage.getItem('anre_annotations');
+    if (!raw) return;
+    annotations = JSON.parse(raw);
+    renderNotesList();
+  } catch(e){}
+}
+
+/* ══════════════════════════════════════════
+   EXPORT HTML (cu editări + adnotări incluse)
+══════════════════════════════════════════ */
+function exportHTML() {
+  const clone = document.documentElement.cloneNode(true);
+  /* Remove interactive-only elements */
+  ['annoTooltip','annoBubble','annoDialog','annoOverlay','notesPanel'].forEach(id => {
+    const el = clone.querySelector('#' + id);
+    if (el) el.style.display = 'none';
+  });
+  /* Bake in current innerHTML of editable cells */
+  EDITABLE_SELECTORS.forEach(sel => {
+    const origEls = document.querySelectorAll(sel);
+    const cloneEls = clone.querySelectorAll(sel);
+    origEls.forEach((el, i) => {
+      if (cloneEls[i]) {
+        cloneEls[i].innerHTML = el.innerHTML;
+        cloneEls[i].removeAttribute('contenteditable');
+      }
+    });
+  });
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'checklist_electrician_ANRE_' + new Date().toISOString().slice(0,10) + '.html';
+  a.click();
+}
+
+/* ── Init ── */
+window.addEventListener('DOMContentLoaded', () => {
+  loadEdits();
+  loadAnnotations();
+  renderNotesList();
+});
+</script>
+</body>
+</html>
